@@ -88,8 +88,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    install_requires=[
-        'djangorestframework>=3.10',
+    install_requires=[ 
         'django>=1.11',
     ],
     extras_require={
@@ -97,6 +96,6 @@ setup(
         'django-filter': ['django-filter>=2.0']
     },
     setup_requires=wheel,
-    python_requires=">=3.5",
+    python_requires=">=2.7",
     zip_safe=False,
 )

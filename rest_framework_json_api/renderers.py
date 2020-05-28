@@ -3,9 +3,9 @@ Renderers
 """
 import copy
 from collections import OrderedDict, defaultdict
-from collections.abc import Iterable
 
-import inflection
+
+
 from django.db.models import Manager
 from django.utils import encoding
 from rest_framework import relations, renderers
@@ -205,12 +205,6 @@ class JSONRenderer(renderers.JSONRenderer):
 
                 relation_data = {}
 
-                if isinstance(resource.get(field_name), Iterable):
-                    relation_data.update(
-                        {
-                            'meta': {'count': len(resource.get(field_name))}
-                        }
-                    )
 
                 if isinstance(field.child_relation, ResourceRelatedField):
                     # special case for ResourceRelatedField
@@ -335,7 +329,7 @@ class JSONRenderer(renderers.JSONRenderer):
         context = current_serializer.context
         included_serializers = utils.get_included_serializers(current_serializer)
         included_resources = copy.copy(included_resources)
-        included_resources = [inflection.underscore(value) for value in included_resources]
+
         render_nested_as_attribute = json_api_settings.SERIALIZE_NESTED_SERIALIZERS_AS_ATTRIBUTE
 
         for field_name, field in iter(fields.items()):

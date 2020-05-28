@@ -2,7 +2,6 @@ import json
 import warnings
 from collections import OrderedDict
 
-import inflection
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import NoReverseMatch
 from django.utils.translation import gettext_lazy as _
@@ -262,8 +261,8 @@ class ResourceRelatedField(HyperlinkedMixin, PrimaryKeyRelatedField):
         if parent is not None:
             # accept both singular and plural versions of field_name
             field_names = [
-                inflection.singularize(field_name),
-                inflection.pluralize(field_name)
+               field_name,
+               field_name
             ]
             includes = get_included_serializers(parent)
             for field in field_names:
@@ -387,7 +386,7 @@ class SerializerMethodResourceRelatedField(SerializerMethodFieldBase, ResourceRe
     with return querysets
     """
 
-    many_kwargs = [*MANY_RELATION_KWARGS, *LINKS_PARAMS, 'method_name', 'model']
+    many_kwargs = [MANY_RELATION_KWARGS, LINKS_PARAMS, 'method_name', 'model']
     many_cls = ManySerializerMethodResourceRelatedField
 
     @classmethod
