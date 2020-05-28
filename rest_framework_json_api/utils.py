@@ -3,7 +3,6 @@ import inspect
 import operator
 from collections import OrderedDict
 
-import inflection
 from django.conf import settings
 from django.db.models import Manager
 from django.db.models.fields.related_descriptors import (
@@ -113,18 +112,6 @@ def format_field_names(obj, format_type=None):
 
 
 def format_value(value, format_type=None):
-    if format_type is None:
-        format_type = json_api_settings.FORMAT_FIELD_NAMES
-    if format_type == 'dasherize':
-        # inflection can't dasherize camelCase
-        value = inflection.underscore(value)
-        value = inflection.dasherize(value)
-    elif format_type == 'camelize':
-        value = inflection.camelize(value, False)
-    elif format_type == 'capitalize':
-        value = inflection.camelize(value)
-    elif format_type == 'underscore':
-        value = inflection.underscore(value)
     return value
 
 
@@ -139,7 +126,7 @@ def format_resource_type(value, format_type=None, pluralize=None):
         # format_type will never be None here so we can use format_value
         value = format_value(value, format_type)
 
-    return inflection.pluralize(value) if pluralize else value
+    return value
 
 
 def get_related_resource_type(relation):

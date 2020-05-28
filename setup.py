@@ -89,7 +89,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     install_requires=[
-        'inflection>=0.3.0',
         'djangorestframework>=3.10',
         'django>=1.11',
     ],

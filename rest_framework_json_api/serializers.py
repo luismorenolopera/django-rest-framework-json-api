@@ -1,6 +1,5 @@
 import warnings
 
-import inflection
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.query import QuerySet
 from django.utils.translation import gettext_lazy as _
@@ -95,7 +94,6 @@ class IncludedResourcesValidationMixin(object):
             serializers = get_included_serializers(serializer_class)
             if serializers is None:
                 raise ParseError('This endpoint does not support the include parameter')
-            this_field_name = inflection.underscore(field_path[0])
             this_included_serializer = serializers.get(this_field_name)
             if this_included_serializer is None:
                 raise ParseError(
